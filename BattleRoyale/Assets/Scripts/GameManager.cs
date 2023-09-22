@@ -43,7 +43,7 @@ public class GameManager : MonoBehaviourPun
     }
 
     [PunRPC]
-    void spawnPlayer()
+    void SpawnPlayer()
     {
         GameObject playerObj = PhotonNetwork.Instantiate(playerPreFabLocation, spawnPoints[Random.Range(0, spawnPoints.Length)].position, Quaternion.identity);
 
