@@ -42,12 +42,16 @@ public class Menu : MonoBehaviourPunCallbacks, ILobbyCallbacks
         // are we in a game?
         if (PhotonNetwork.InRoom)
         {
-            // go to lobby
+            // go to the lobby
+            SetScreen(lobbyScreen);
+            UpdateLobbyUI();
 
             // make the room visable again
             PhotonNetwork.CurrentRoom.IsVisible = true;
             PhotonNetwork.CurrentRoom.IsOpen = true;
         }
+
+       
     }
 
     // changes the currently visable screen
@@ -199,6 +203,7 @@ public class Menu : MonoBehaviourPunCallbacks, ILobbyCallbacks
 
     public override void OnRoomListUpdate(List<RoomInfo> allRooms)
     {
+        Debug.Log("OnRoomListUpdate called from Photon");
         roomList = allRooms;
     } 
 }
