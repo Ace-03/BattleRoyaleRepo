@@ -38,8 +38,8 @@ public class GameManager : MonoBehaviourPun
     {
         playersInGame++;
 
-        if (PhotonNetwork.IsMasterClient && playersInGame == PhotonNetwork.PlayerList.Length);
-        photonView.RPC("SpawnPlayer", RpcTarget.All);
+        if (PhotonNetwork.IsMasterClient && playersInGame == PhotonNetwork.PlayerList.Length)
+            photonView.RPC("SpawnPlayer", RpcTarget.All);
     }
 
     [PunRPC]
