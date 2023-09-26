@@ -42,12 +42,16 @@ public class Menu : MonoBehaviourPunCallbacks, ILobbyCallbacks
         // are we in a game?
         if (PhotonNetwork.InRoom)
         {
-            // go to lobby
+            // go to the lobby
+            SetScreen(lobbyScreen);
+            UpdateLobbyUI();
 
             // make the room visable again
             PhotonNetwork.CurrentRoom.IsVisible = true;
             PhotonNetwork.CurrentRoom.IsOpen = true;
         }
+
+       
     }
 
     // changes the currently visable screen
@@ -63,7 +67,7 @@ public class Menu : MonoBehaviourPunCallbacks, ILobbyCallbacks
         screen.SetActive(true);
 
         if (screen == lobbyBrowserScreen)
-            UpdateLobbyUI();
+            UpdateLobbyBrowserUI();
     }
 
     // called when the "Back" button gets pressed
@@ -130,7 +134,7 @@ public class Menu : MonoBehaviourPunCallbacks, ILobbyCallbacks
             playerListText.text += player.NickName + "\n";
 
         // set the room info text
-        roomInfoText.text = "<b>Room Name<\n>" + PhotonNetwork.CurrentRoom.Name;
+        roomInfoText.text = "<b>Room Name:</b>\n" + PhotonNetwork.CurrentRoom.Name;
     }
 
     public void OnStartGameButton()
@@ -161,6 +165,7 @@ public class Menu : MonoBehaviourPunCallbacks, ILobbyCallbacks
 
     void UpdateLobbyBrowserUI()
     {
+        Debug.Log(roomList.Count);
         // diable all room buttons
         foreach (GameObject button in roomButtons)
             button.SetActive(false);
@@ -168,6 +173,7 @@ public class Menu : MonoBehaviourPunCallbacks, ILobbyCallbacks
         // display all current rooms in the master server
         for (int x = 0; x < roomList.Count; ++x)
         {
+            Debug.Log("oi");
             // get or create the button object
             GameObject button = x >= roomButtons.Count ? CreateRoomButton() : roomButtons[x];
 
@@ -192,13 +198,14 @@ public class Menu : MonoBehaviourPunCallbacks, ILobbyCallbacks
         NetworkManager.instance.JoinRoom(roomName);
     }
 
-    public void OnRefreshButton (string roomName)
+    public void OnRefreshButton ()
     {
-        UpdateLobbyUI();
+        UpdateLobbyBrowserUI();
     }
 
     public override void OnRoomListUpdate(List<RoomInfo> allRooms)
     {
+        Debug.Log("OnRoomListUpdate called from Photon");
         roomList = allRooms;
     } 
 }

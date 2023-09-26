@@ -39,6 +39,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         options.MaxPlayers = (byte)maxPlayers;
 
         PhotonNetwork.CreateRoom(roomName, options);
+        Debug.Log("Room Made!");
     }
 
     public void JoinRoom(string roomName)
