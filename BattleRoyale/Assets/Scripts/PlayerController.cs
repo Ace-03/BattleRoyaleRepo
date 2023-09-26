@@ -8,10 +8,17 @@ public class PlayerController : MonoBehaviourPun
 {
     [Header("Info")]
     public int id;
+    private int curAttackerId;
 
     [Header("Stats")]
     public float movespeed;
     public float jumpForce;
+    public int curHP;
+    public int maxHP;
+    public int kills;
+    public bool dead;
+    private bool flashingDamage;
+    public MeshRenderer mr;
 
     [Header("Components")]
     public Rigidbody rig;
@@ -35,6 +42,9 @@ public class PlayerController : MonoBehaviourPun
 
     void Update()
     {
+        if (!photonView.IsMine || dead)
+            return;
+
         Move();
 
         if (Input.GetKeyDown(KeyCode.Space))
@@ -65,5 +75,23 @@ public class PlayerController : MonoBehaviourPun
             rig.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
     }
 
-   
+
+    [PunRPC]
+    public void TakeDamage(int attackerId, int damage)
+    {
+        if (dead)
+            return;
+
+        curHP -= damage;
+        curAttackerId = attackerId;
+
+        // flash the player red
+        photonView.RPC("DamageFlash", RpcTarget.Others);
+
+        // update the health bar UI
+
+        // die if no health left
+        if (curHP <= 0)
+            photonView.RPC("Die", RpcTarget.All);
+    }
 }
