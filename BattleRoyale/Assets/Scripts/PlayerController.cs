@@ -94,4 +94,26 @@ public class PlayerController : MonoBehaviourPun
         if (curHP <= 0)
             photonView.RPC("Die", RpcTarget.All);
     }
+
+    [PunRPC]
+    void DamageFlash()
+    {
+        if (flashingDamage)
+            return;
+
+        StartCoroutine(DamageFlashCoRoutine());
+
+        IEnumerator DamageFlashCoRoutine()
+        {
+            flashingDamage = true;
+
+            Color defaultColor = mr.material.color;
+            mr.material.color = Color.red;
+
+            yield return new WaitForSeconds(0.05f);
+
+            mr.material.color = defaultColor;
+            flashingDamage = false;
+        }
+    }
 }
