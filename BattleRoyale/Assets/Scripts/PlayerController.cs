@@ -116,4 +116,10 @@ public class PlayerController : MonoBehaviourPun
             flashingDamage = false;
         }
     }
+
+    [PunRPC]
+    void Die()
+    { 
+        
+    }
 }
