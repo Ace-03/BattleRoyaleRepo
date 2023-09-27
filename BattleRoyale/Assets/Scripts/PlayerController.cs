@@ -23,6 +23,7 @@ public class PlayerController : MonoBehaviourPun
     [Header("Components")]
     public Rigidbody rig;
     public Player photonPlayer;
+    public PlayerWeapon weapon;
 
     [PunRPC]
     public void Initialize(Player player)
@@ -49,6 +50,9 @@ public class PlayerController : MonoBehaviourPun
 
         if (Input.GetKeyDown(KeyCode.Space))
             TryJump();
+
+        if (Input.GetMouseButtonDown(0))
+            weapon.TryShoot();
     }
 
     void Move() 
@@ -116,6 +120,7 @@ public class PlayerController : MonoBehaviourPun
             flashingDamage = false;
         }
     }
+
 
     [PunRPC]
     void Die()

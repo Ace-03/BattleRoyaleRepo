@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1652528039804488199
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1146148358006737048}
+  m_Layer: 0
+  m_Name: BulletSpawnPos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1146148358006737048
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1652528039804488199}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.279, y: -0.884, z: -0.293}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2640568644848618610}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5275646209965539870
 GameObject:
   m_ObjectHideFlags: 0
@@ -24,15 +55,16 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5275646209965539870}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: 0.063, y: 0.6, z: -0.136}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 880545718265315651}
   - {fileID: 7705712754938134688}
+  - {fileID: 1146148358006737048}
   m_Father: {fileID: 2662381142419793203}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
 --- !u!1 &5627163067732797457
 GameObject:
   m_ObjectHideFlags: 0
@@ -370,13 +402,14 @@ GameObject:
   - component: {fileID: 6062542937611489927}
   - component: {fileID: 5695216436460456343}
   - component: {fileID: 4094558342413745361}
+  - component: {fileID: 5143900264906707256}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &274370056279114122
 Transform:
   m_ObjectHideFlags: 0
@@ -508,12 +541,13 @@ MonoBehaviour:
   id: 0
   movespeed: 5
   jumpForce: 7
-  curHP: 0
-  maxHP: 0
+  curHP: 100
+  maxHP: 100
   kills: 0
   dead: 0
   mr: {fileID: 0}
   rig: {fileID: 2857527941889402978}
+  weapon: {fileID: 5143900264906707256}
 --- !u!114 &5695216436460456343
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -553,3 +587,22 @@ MonoBehaviour:
   m_SynchronizeRotation: 1
   m_SynchronizeScale: 0
   m_UseLocal: 1
+--- !u!114 &5143900264906707256
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9036402511591864918}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 15cc42f83527e714b8eac737c35cf4ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 10
+  curAmmo: 50
+  maxAmmo: 50
+  bulletSpeed: 20
+  shootRate: 0.2
+  bulletPrefab: {fileID: 2643887511983487207, guid: 1cdb3fb35ce919f4b80567f92328a548, type: 3}
+  bulletSpawnPos: {fileID: 1146148358006737048}

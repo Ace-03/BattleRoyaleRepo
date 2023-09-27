@@ -13,7 +13,7 @@ public class GameManager : MonoBehaviourPun
     public PlayerController[] players;
     public Transform[] spawnPoints;
     public int alivePlayers;
-   
+
 
     private int playersInGame;
 
@@ -51,6 +51,14 @@ public class GameManager : MonoBehaviourPun
         playerObj.GetComponent<PlayerController>().photonView.RPC("Initialize", RpcTarget.All, PhotonNetwork.LocalPlayer);
     }
 
-    
+    public PlayerController GetPlayer(int playerId)
+    {
+        return players.First(x => x.id == playerId);
+    }
+
+    public PlayerController GetPlayer(GameObject playerObj)
+    {
+        return players.First(x => x.gameObject == gameObject);
+    } 
 
 }
