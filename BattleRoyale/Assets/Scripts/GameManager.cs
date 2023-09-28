@@ -17,6 +17,8 @@ public class GameManager : MonoBehaviourPun
 
     private int playersInGame;
 
+    public float postGameTime;
+
     // instance
     public static GameManager instance;
 
@@ -53,12 +55,45 @@ public class GameManager : MonoBehaviourPun
 
     public PlayerController GetPlayer(int playerId)
     {
-        return players.First(x => x.id == playerId);
+        foreach (PlayerController player in players)
+        {
+            if (player != null && player.id == playerId)
+                return player;
+        }
+
+        return null;
     }
 
-    public PlayerController GetPlayer(GameObject playerObj)
+    public PlayerController GetPlayer(GameObject playerObject)
     {
-        return players.First(x => x.gameObject == gameObject);
-    } 
+        foreach (PlayerController player in players)
+        {
+            if (player != null && player.gameObject == playerObject)
+                return player;
+        }
 
+        return null;
+    }
+
+    public void CheckWinCondition()
+    {
+        if (alivePlayers == 1)
+            photonView.RPC("WinGame", RpcTarget.All, players.First(x => !x.dead).id);
+    }
+
+    [PunRPC]
+    void WinGame(int winningPlayer)
+    {
+        // set the UI win text
+        GameUI.instance.SetWinText(GetPlayer(winningPlayer).photonPlayer.NickName);
+
+        Invoke("GoBackToMenu", postGameTime);
+    }
+    
+    void GoBackToMenu()
+    {
+        NetworkManager.instance.ChangeScene("Menu");
+    }
+
+    
 }

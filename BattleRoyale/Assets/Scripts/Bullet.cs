@@ -19,8 +19,9 @@ public class Bullet : MonoBehaviour
         Destroy(gameObject, 5.0f);
     }
 
-    void onTriggerEnter(Collider other)
+    void OnTriggerEnter(Collider other)
     {
+        Debug.Log("Hit");
         // did we hit a player?
         // if this is the local player's bullet, damage the hit player
         // we're using client side hit detection
