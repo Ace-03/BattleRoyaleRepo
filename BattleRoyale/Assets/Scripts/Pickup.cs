@@ -31,7 +31,7 @@ public class Pickup : MonoBehaviourPun
                 player.photonView.RPC("GiveAmmo", player.photonPlayer, value);
 
             // destory the object
-            photonView.RPC("DestroyPickup", RpcTarget.AllBuffered);
+            photonView.RPC("DestroyPickup", RpcTarget.AllBuffered); 
         }
 
         
