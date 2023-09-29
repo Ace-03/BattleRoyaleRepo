@@ -102,6 +102,7 @@ public class PlayerController : MonoBehaviourPun
         // die if no health left
         if (curHP <= 0)
             photonView.RPC("Die", RpcTarget.All);
+
     }
 
     [PunRPC]
