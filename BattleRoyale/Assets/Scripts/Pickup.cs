@@ -9,7 +9,7 @@ public enum PickUpType
     Ammo
 }
 
-public class Pickup : MonoBehaviour
+public class Pickup : MonoBehaviourPun
 {
     public PickUpType type;
     public int value;
@@ -31,14 +31,14 @@ public class Pickup : MonoBehaviour
                 player.photonView.RPC("GiveAmmo", player.photonPlayer, value);
 
             // destory the object
-            player.photonView.RPC("DestroyPickup", RpcTarget.AllBuffered);
+            photonView.RPC("DestroyPickup", RpcTarget.AllBuffered);
         }
 
         
     }
 
     [PunRPC]
-    public void DestoryPickup()
+    public void DestroyPickup()
     {
         Destroy(gameObject);
     }
