@@ -76,7 +76,7 @@ public class ForceField : MonoBehaviourPun
             {
                 if (player.dead || !player)
                     continue;
-                if (Vector3.Distance(this.transform.position, player.transform.position) >= transform.localScale.x)
+                if (Vector3.Distance(new Vector3(this.transform.position.x,0,this.transform.position.z), new Vector3(player.transform.position.x,0,player.transform.position.z)) >= transform.localScale.x)
                 {
                     player.photonView.RPC("TakeDamage", player.photonPlayer, 0, playerDamage);
                 }
