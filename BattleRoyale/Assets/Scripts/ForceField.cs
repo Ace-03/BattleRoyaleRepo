@@ -46,7 +46,7 @@ public class ForceField : MonoBehaviourPun
     void Shrink()
     {
         shrinking = true;
-
+        Debug.Log("Shrinking");
         // make sure we don't shrink below the min amount
         if (transform.localScale.x - shrinkAmount > minShrinkAmount)
             targetDiameter -= shrinkAmount;
